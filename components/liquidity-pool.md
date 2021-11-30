@@ -1,3 +1,5 @@
+# Kolibri Liquidity Pool
+
 ## Overview
 
 A **Liquidity Pool** is a shared pool where users contribute funds in order to liquidate under-collateralized ovens.
