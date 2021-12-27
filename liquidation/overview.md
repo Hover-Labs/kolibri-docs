@@ -49,12 +49,15 @@ The following graphics depicts the set of rules for liquidations in the Kolibri 
     </tbody>
 </table>
 
-1. Alice creates an `Oven` and deposits 10 `XTZ` (worth $40). She borrows 20 `kUSD` (worth $20) against the collateral she has in the `Oven`. Since the oven has a collateralization ratio of 200%, it's the maximum she's able to borrow, and puts her at significant liquidation risk if the price of `XTZ` were to drop.
-2. Some time later, the price of `XTZ/USD` drops to $3.90. The 10 `XTZ` in her `Oven` is now worth only $39, the 20 `kUSD` loan is still worth $20, and the `Oven` is now collateralized at 195% and can be liquidated by the Liquidity Pool 
-3. Bob notices the `Oven` is liquidatable by the Liquidity Pool and calls the `liquidate` entrypoint.
-4. The Liquidity Pool pays all outstanding `kUSD`, along with a 10% **liquidation fee** (20 `kUSD` + 2 `kUSD` = 22 `kUSD`), Bob recieves a 1 `XTZ` **liquidation reward** (10% of the collateral), the rest of the collateral 9 `XTZ` (worth $35.1) is sold on Quipuswap to `kUSD` to be distributed to the Liquidity Pool.
-5. The `Oven` transitions to a liquidated state, the 20 `kUSD` is burned/destroyed, and the 2 `kUSD` penalty is split between the `Stability fund`, and the `Development fund` in a 90/10 ratio (1.80 `kUSD` goes into the `Stability fund` and 0.20 `kUSD` goes into the `Development fund`)
-3*. For some reason the `Oven` hasn't been liquidated by the Liquidity Pool. Some time later the price of `XTZ/USD` drops to $3.50. The 10 `XTZ` in her `Oven` is now worth only $35, the 20 `kUSD` is still worth $20, the `Oven` is now collateralized at 175%, the collateralization ratio dropped below `collateralizatizationRequirement - privateLiquidationThreshold` (175% < (200 - 20)%) and it can be liquidated by a private liquidator.
-4*. Bob notices he can liquidate the `Oven`. 
-5*. Bob pays all outstanding `kUSD`, along with a 10% **liquidation fee**, 20 `kUSD` + 2 `kUSD` = 22 `kUSD`, and receives $35 worth of `XTZ`
-6*. The `Oven` transitions to a liquidated state, the 20 kUSD is burned/destroyed, the 2 `kUSD` penalty is split between the `Stability fund` and the `Development fund` in a 90/10 ratio (1.80 `kUSD` goes into the `Stability fund` and 0.20 `kUSD` goes into the `Development fund`)
+Alice creates an `Oven` and deposits 10 `XTZ` (worth $40). She borrows 20 `kUSD` (worth $20) against the collateral she has in the `Oven`. Since the oven has a collateralization ratio of 200%, it's the maximum she's able to borrow, and puts her at significant liquidation risk if the price of `XTZ` were to drop.
+
+Some time later, the price of `XTZ/USD` drops to $3.90. The 10 `XTZ` in her `Oven` is now worth only $39, the 20 `kUSD` loan is still worth $20, and the `Oven` is now collateralized at 195% and can be liquidated by the Liquidity Pool 
+1. Bob notices the `Oven` is liquidatable by the Liquidity Pool and calls the `liquidate` entrypoint.
+2. The Liquidity Pool pays all outstanding `kUSD`, along with a 10% **liquidation fee** (20 `kUSD` + 2 `kUSD` = 22 `kUSD`), Bob recieves a 1 `XTZ` **liquidation reward** (10% of the collateral), the rest of the collateral 9 `XTZ` (worth $35.1) is sold on Quipuswap to `kUSD` to be distributed to the Liquidity Pool.
+3. The `Oven` transitions to a liquidated state, the 20 `kUSD` is burned/destroyed, and the 2 `kUSD` penalty is split between the `Stability fund`, and the `Development fund` in a 90/10 ratio (1.80 `kUSD` goes into the `Stability fund` and 0.20 `kUSD` goes into the `Development fund`)
+
+If for some reason the `Oven` hasn't been liquidated by the Liquidity Pool it can be liquidated by a private entity when the collateralization ratio drops below `collateralizatizationRequirement - privateLiquidationThreshold` ((200 - 20)% at the time of writting). 
+<br>Some time later, the price of `XTZ/USD` drops to $3.50. The 10 `XTZ` in her `Oven` is now worth only $35, the 20 `kUSD` is still worth $20, the `Oven` is now collateralized at 175%, and it can be liquidated by a private liquidator.
+1. Bob notices he can liquidate the `Oven`.
+2. Bob pays all outstanding `kUSD`, along with a 10% **liquidation fee**, 20 `kUSD` + 2 `kUSD` = 22 `kUSD`, and receives $35 worth of `XTZ`.
+3. The `Oven` transitions to a liquidated state, the 20 kUSD is burned/destroyed, the 2 `kUSD` penalty is split between the `Stability fund` and the `Development fund` in a 90/10 ratio (1.80 `kUSD` goes into the `Stability fund` and 0.20 `kUSD` goes into the `Development fund`).
